@@ -6,6 +6,6 @@ TERMUX_PKG_SHA256=25772f653ac5b2e3ceeb89df50e4688891e21f723c460636548971652af0a8
 TERMUX_PKG_FOLDERNAME=attr-$TERMUX_PKG_VERSION
 TERMUX_PKG_BUILD_IN_SRC=yes
 TERMUX_PKG_EXTRA_CONFIGURE_ARGS="--enable-gettext=no"
-TERMUX_PKG_MAKE_INSTALL_TARGET="install install-lib"
+TERMUX_PKG_MAKE_INSTALL_TARGET="install install-lib install-dev"
 # attr.5 man page is in linux-man-pages:
 TERMUX_PKG_RM_AFTER_INSTALL="share/man/man5/attr.5"
