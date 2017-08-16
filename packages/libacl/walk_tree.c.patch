@@ -1,0 +1,26 @@
+diff --git a/libmisc/walk_tree.c b/libmisc/walk_tree.c
+index 2be9d47..b145b92 100644
+--- a/libmisc/walk_tree.c
++++ b/libmisc/walk_tree.c
+@@ -122,7 +122,11 @@ static int walk_tree_rec(const char *path, int walk_flags,
+ close_another_dir:
+ 			/* Close the topmost directory handle still open. */
+ 			closed = closed->prev;
++#ifdef __ANDROID__
++			closed->pos = -1;
++#else
+ 			closed->pos = telldir(closed->stream);
++#endif
+ 			closedir(closed->stream);
+ 			closed->stream = NULL;
+ 			num_dir_handles++;
+@@ -188,7 +192,9 @@ close_another_dir:
+ 				if (!dir.stream)
+ 					return err + func(path, NULL, flags |
+ 						    WALK_TREE_FAILED, arg);
++#ifndef __ANDROID__
+ 				seekdir(dir.stream, dir.pos);
++#endif
+ 
+ 				closed = closed->next;
+ 				num_dir_handles--;
